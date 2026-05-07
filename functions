@@ -59,7 +59,7 @@ function build_config() {
 }
 
 function build_uboot_deb_package() {
-	dpkg-buildpackage -b -rfakeroot -us -uc -a "${DEVICE_ARCH}"
+	BOARD="${DEVICE_NAME}" dpkg-buildpackage -b -rfakeroot -us -uc -a "${DEVICE_ARCH}"
 
 	deb_files=$(find "${UBOOT_DIR}/.." -maxdepth 1 -name "u-boot-${DEVICE_NAME}*")
 
@@ -74,7 +74,6 @@ function build_uboot_deb_package() {
 
 function build_ubootdeb() {
 	source_toolchain
-	build_config
 	build_uboot_deb_package
 }
 
